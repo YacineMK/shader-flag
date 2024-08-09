@@ -18,9 +18,9 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   1000
 );
-camera.position.set(0.25, 0.25, 2.5);
+camera.position.z = 2.5;
 
-const renderer = new THREE.WebGLRenderer({ canvas: mycanvas });
+const renderer = new THREE.WebGLRenderer({ canvas: mycanvas , alpha: true , antialias: true});
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 const geometry = new THREE.BoxGeometry(0.1, 1.1, 0.6, 1, 15, 15);
@@ -28,13 +28,14 @@ const geometry = new THREE.BoxGeometry(0.1, 1.1, 0.6, 1, 15, 15);
 const material = new THREE.ShaderMaterial({
   vertexShader: vert,  
   fragmentShader: frag,
-  uniforms: {}
+  uniforms: {
+    
+  }
 });
 
 const flag = new THREE.Mesh(geometry, material);
 flag.rotateY(30);
 flag.rotateX(33);
-flag.rotateZ(-6);
 
 scene.add(flag);
 
@@ -45,7 +46,13 @@ gui.add(params, "Wireframe").onChange((value) => {
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
+const Clock = new THREE.Clock();
+
 function animate() {
+
+  
+
+
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
 }
