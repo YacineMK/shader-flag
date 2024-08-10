@@ -23,7 +23,7 @@ camera.position.z = 2.5;
 const renderer = new THREE.WebGLRenderer({ canvas: mycanvas , alpha: true , antialias: true});
 renderer.setSize(window.innerWidth, window.innerHeight);
 
-const geometry = new THREE.BoxGeometry(1.12, 0.6, 0.1, 15, 15, 15);
+const geometry = new THREE.BoxGeometry(1.14, 0.6, 0.1, 15, 15, 15);
 
 const material = new THREE.ShaderMaterial({
   vertexShader: vert,  
