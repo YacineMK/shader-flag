@@ -6,7 +6,7 @@ import vert from "./shaders/vert.glsl";
 
 const gui = new GUI();
 const params = {
-  Wireframe: true,
+  Wireframe: false,
 };
 
 const mycanvas = document.getElementById("canvas");
@@ -23,19 +23,21 @@ camera.position.z = 2.5;
 const renderer = new THREE.WebGLRenderer({ canvas: mycanvas , alpha: true , antialias: true});
 renderer.setSize(window.innerWidth, window.innerHeight);
 
-const geometry = new THREE.BoxGeometry(0.1, 1.1, 0.6, 1, 15, 15);
+const geometry = new THREE.BoxGeometry(1.12, 0.6, 0.1, 15, 15, 15);
 
 const material = new THREE.ShaderMaterial({
   vertexShader: vert,  
   fragmentShader: frag,
   uniforms: {
-    
+    Time: { value: 0 },
+    Speed : { value: 3.0 },
   }
 });
 
 const flag = new THREE.Mesh(geometry, material);
-flag.rotateY(30);
-flag.rotateX(33);
+flag.rotateY(0);
+flag.rotateX(0);
+flag.rotateZ(0);
 
 scene.add(flag);
 
@@ -51,7 +53,8 @@ const Clock = new THREE.Clock();
 function animate() {
 
   
-
+  const t = Clock.getElapsedTime();
+  flag.material.uniforms.Time.value = t;
 
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
